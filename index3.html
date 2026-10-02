@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Center 2K Semi Novos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* PALETA (edite aqui para trocar as cores) */
+:root{
+  --cor-principal:#ff6d00; --cor-escura:#e65100;
+  --grafite:#263238; --grafite-claro:#455a64;
+  --fundo:#f4f5f7; --texto:#263238;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:Barlow,Arial,Helvetica,sans-serif;color:var(--texto);background:#fff;line-height:1.6}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",Arial,sans-serif;line-height:1.05;font-weight:700}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:2px solid var(--cor-principal);outline-offset:2px}
+
+/* TOPO */
+.topo{position:sticky;top:0;z-index:20;background:var(--grafite);color:#fff}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-family:"Barlow Condensed",Arial,sans-serif;font-weight:700;font-size:24px;text-decoration:none}
+.logo b{color:var(--cor-principal)}
+.menu{display:flex;gap:22px;list-style:none;font-size:15px}
+.menu a{text-decoration:none;opacity:.85}
+.menu a:hover{opacity:1;color:var(--cor-principal)}
+.btn{display:inline-block;background:var(--cor-principal);color:#fff;border:0;border-radius:6px;padding:12px 22px;font:600 16px Barlow,Arial,sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--cor-escura)}
+.btn.claro{background:transparent;border:2px solid #fff}
+.btn.claro:hover{background:#fff;color:var(--grafite)}
+
+/* DESTAQUE */
+.hero{background:linear-gradient(135deg,var(--grafite),var(--grafite-claro));color:#fff;padding:90px 0 100px}
+.hero h1{font-size:clamp(44px,8vw,84px);max-width:11em}
+.hero p{font-size:19px;max-width:34em;margin:20px 0 32px;opacity:.9}
+.hero .acoes{display:flex;gap:12px;flex-wrap:wrap}
+
+/* SEÇÕES */
+section{padding:72px 0}
+section.cinza{background:var(--fundo)}
+section h2{font-size:clamp(32px,5vw,46px);margin-bottom:10px}
+.sub{color:var(--grafite-claro);max-width:38em;margin-bottom:32px}
+
+/* ESTOQUE */
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.carro{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e3e6ea}
+.carro .foto{height:140px;background:linear-gradient(135deg,var(--grafite-claro),var(--grafite));color:#fff;display:flex;align-items:flex-end;padding:14px;font:700 28px "Barlow Condensed",Arial,sans-serif}
+.carro .info{padding:16px}
+.carro .ano{color:var(--grafite-claro);font-size:14px}
+.carro .preco{font:700 26px "Barlow Condensed",Arial,sans-serif;color:var(--cor-escura);margin:6px 0 12px}
+.carro a{font-weight:600;color:var(--cor-escura)}
+
+/* SERVIÇOS */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.duas h3{font-size:30px;margin-bottom:10px}
+.duas ul{margin:12px 0 0 20px}
+
+/* CONTATO */
+.contato{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.contato h3{font-size:26px;margin-bottom:8px}
+.contato p{margin-bottom:6px}
+
+footer{background:var(--grafite);color:#fff;padding:28px 0;font-size:14px;opacity:.95}
+
+/* CHAT FLUTUANTE */
+.chat-fab{position:fixed;right:20px;bottom:20px;z-index:30;display:flex;align-items:center;gap:8px;background:var(--cor-principal);color:#fff;border:0;border-radius:30px;padding:14px 20px;font:600 16px Barlow,Arial,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.chat-fab:hover{background:var(--cor-escura)}
+.chat-container{position:fixed;right:20px;bottom:20px;z-index:40;width:380px;max-width:calc(100vw - 40px);height:min(600px,calc(100dvh - 40px));background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.35);display:none;flex-direction:column}
+.chat-container.aberto{display:flex}
+.chat-header{background:linear-gradient(135deg,#000,#2b2b2b);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.store-icon{width:40px;height:40px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px}
+.header-info{flex:1}
+.header-info h2{font-size:20px;margin:0}
+.status{font-size:13px;opacity:.9}
+.online{display:inline-block;width:8px;height:8px;background:#4caf50;border-radius:50%;margin-right:5px}
+.fechar{background:none;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:4px 8px}
+.chat-messages{flex:1;padding:16px;overflow-y:auto;background:var(--fundo)}
+.message{display:flex;margin-bottom:12px}
+.message.user{justify-content:flex-end}
+.message-content{max-width:82%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.bot .message-content{background:#fff;color:#333;border-bottom-left-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.user .message-content{background:var(--cor-principal);color:#fff;border-bottom-right-radius:4px}
+.time{display:block;font-size:10px;margin-top:4px;opacity:.6}
+.typing{display:none;font-size:12px;color:#777;padding:0 16px 8px;background:var(--fundo)}
+.quick-options{padding:8px 14px;background:#fff;border-top:1px solid #eee}
+.options{display:flex;gap:6px;flex-wrap:wrap}
+.option{border:1px solid var(--cor-principal);background:#fff;color:var(--cor-escura);padding:6px 10px;border-radius:20px;cursor:pointer;font:500 12px Barlow,Arial,sans-serif}
+.option:hover{background:var(--cor-principal);color:#fff}
+.chat-input{display:flex;align-items:center;gap:8px;padding:12px;background:#fff;border-top:1px solid #eee}
+.chat-input input{flex:1;border:0;background:#f1f3f6;border-radius:25px;padding:12px 16px;font:400 14px Barlow,Arial,sans-serif}
+.send-button{width:42px;height:42px;border:0;border-radius:50%;background:var(--cor-principal);color:#fff;cursor:pointer;font-size:17px}
+.send-button:hover{background:var(--cor-escura)}
+.send-button:disabled,.option:disabled{opacity:.5;cursor:not-allowed}
+
+@media (max-width:760px){
+  .menu{display:none}
+  .duas,.contato{grid-template-columns:1fr}
+  .hero{padding:60px 0 70px}
+  section{padding:52px 0}
+  .chat-container{right:0;bottom:0;width:100%;max-width:none;height:100dvh;border-radius:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="logo" href="#inicio">Auto Center <b>2K</b></a>
+    <ul class="menu">
+      <li><a href="#estoque">Veículos</a></li>
+      <li><a href="#financiamento">Financiamento</a></li>
+      <li><a href="#troca">Troca</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a class="btn" href="#contato">Agendar test drive</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <h1>Seu próximo carro está aqui</h1>
+      <p>Seminovos revisados, financiamento com os principais bancos e avaliação do seu veículo na troca.</p>
+      <div class="acoes">
+        <a class="btn" href="#estoque">Ver veículos</a>
+        <button class="btn claro" type="button" onclick="abrirChat()">Falar com o atendente</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="estoque">
+    <div class="wrap">
+      <h2>Veículos em destaque</h2>
+      <p class="sub">O estoque muda com frequência. Fale com um vendedor para confirmar a disponibilidade.</p>
+      <div class="grade" id="grade"></div>
+    </div>
+  </section>
+
+  <section class="cinza">
+    <div class="wrap duas">
+      <div id="financiamento">
+        <h3>Financiamento</h3>
+        <p>Simulamos com os principais bancos. A parcela depende da entrada, do prazo e da análise de crédito.</p>
+        <ul id="docs"></ul>
+      </div>
+      <div id="troca">
+        <h3>Troca com avaliação</h3>
+        <p>Seu veículo vale como entrada. Traga o carro e o documento (CRLV) para avaliar, ou envie marca, modelo, ano e quilometragem pelo WhatsApp.</p>
+        <p style="margin-top:14px"><button class="btn" type="button" onclick="quickMessage('Quero trocar meu carro')">Perguntar ao atendente</button></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <h2>Venha conhecer a loja</h2>
+      <p class="sub">Para o test drive, leve sua CNH válida.</p>
+      <div class="contato">
+        <div>
+          <h3>Onde estamos</h3>
+          <p id="endereco"></p>
+          <p id="h-semana"></p>
+          <p id="h-sabado"></p>
+          <p id="h-domingo"></p>
+        </div>
+        <div>
+          <h3>Fale com um vendedor</h3>
+          <p>Telefone: <strong id="telefone"></strong></p>
+          <p>WhatsApp: <strong id="whatsapp"></strong></p>
+          <p style="margin-top:14px"><button class="btn" type="button" onclick="quickMessage('Quero agendar um test drive')">Agendar test drive</button></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap" id="rodape"></div>
+</footer>
+
+<!-- BOTÃO DO CHAT -->
+<button class="chat-fab" id="chatFab" type="button" onclick="abrirChat()" aria-label="Abrir atendimento virtual">💬 Atendimento</button>
+
+<!-- CHAT -->
+<div class="chat-container" id="chatBox" role="dialog" aria-label="Atendente virtual">
+
+  <div class="chat-header">
+    <div class="store-icon">🚗</div>
+    <div class="header-info">
+      <h2 id="storeName">Atendente Virtual</h2>
+      <div class="status"><span class="online"></span><span id="storeStatus">Online</span></div>
+    </div>
+    <button class="fechar" type="button" onclick="fecharChat()" aria-label="Fechar atendimento">×</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages" aria-live="polite">
+    <div class="message bot"><div class="message-content">
+      Olá! 👋<br><br>
+      Seja bem-vindo(a) ao atendimento virtual da <strong class="store-name"></strong>.<br><br>
+      Como posso ajudar você?
+      <span class="time"></span>
+    </div></div>
+    <div class="message bot"><div class="message-content">
+      Você pode perguntar sobre:<br><br>
+      🚗 Veículos disponíveis<br>
+      💰 Preços e condições<br>
+      🏦 Financiamento<br>
+      🔄 Troca do seu veículo<br>
+      📅 Test drive<br>
+      📍 Localização e horários<br>
+      📞 Falar com um vendedor
+      <span class="time"></span>
+    </div></div>
+  </div>
+
+  <div class="typing" id="typing">🤖 Atendente está digitando...</div>
+
+  <div class="quick-options">
+    <div class="options">
+      <button class="option" onclick="quickMessage('Quais veículos estão disponíveis?')">🚗 Veículos</button>
+      <button class="option" onclick="quickMessage('Quais os preços e condições?')">💰 Preços</button>
+      <button class="option" onclick="quickMessage('Quero saber sobre financiamento')">🏦 Financiamento</button>
+      <button class="option" onclick="quickMessage('Quero trocar meu carro')">🔄 Troca</button>
+      <button class="option" onclick="quickMessage('Quero agendar um test drive')">📅 Test drive</button>
+      <button class="option" onclick="quickMessage('Onde fica a loja e qual o horário?')">📍 Localização</button>
+      <button class="option" onclick="quickMessage('Quero falar com um vendedor')">📞 Vendedor</button>
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="messageInput" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem" onkeydown="handleKey(event)">
+    <button class="send-button" aria-label="Enviar mensagem" onclick="sendMessage()">➤</button>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURAÇÃO DA LOJA  (EDITE AQUI)
+   Telefone, WhatsApp, endereço e estoque ainda são EXEMPLOS.
+   ============================================================ */
+const CONFIG = {
+    nome: "Auto Center 2K Semi Novos",
+    segmento: "Seminovos e multimarcas",
+    endereco: "Av. Principal, 1000 - Centro - Cidade/UF",
+    telefone: "(00) 0000-0000",
+    whatsapp: "(00) 90000-0000",
+    horario: {
+        semana: "Segunda a sexta: 08:00 às 18:00",
+        sabado: "Sábado: 08:00 às 13:00",
+        domingo: "Domingo: fechado"
+    },
+    pagamento: "à vista, financiamento, consórcio e troca",
+    documentosFinanciamento: [
+        "RG e CPF (ou CNH)",
+        "Comprovante de residência recente",
+        "Comprovante de renda"
+    ]
+};
+
+const ESTOQUE = [
+    { marca: "Chevrolet",  modelo: "Onix LT",      ano: 2021, preco: 62900 },
+    { marca: "Volkswagen", modelo: "Polo TSI",     ano: 2022, preco: 79900 },
+    { marca: "Hyundai",    modelo: "HB20 Comfort", ano: 2020, preco: 56900 }
+];
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+let aguardando = false;
+
+function getTime() {
+    return new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+
+function formatPrice(valor) {
+    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+function normalize(text) {
+    return text.toLowerCase().normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ").trim();
+}
+
+function setBusy(busy) {
+    aguardando = busy;
+    document.querySelectorAll(".option, .send-button").forEach(function (el) { el.disabled = busy; });
+    const input = document.getElementById("messageInput");
+    input.disabled = busy;
+    if (!busy) { input.focus(); }
+}
+
+/* ============================================================
+   ABRIR / FECHAR O CHAT
+   ============================================================ */
+function abrirChat() {
+    document.getElementById("chatBox").classList.add("aberto");
+    document.getElementById("chatFab").style.display = "none";
+    document.getElementById("messageInput").focus();
+}
+
+function fecharChat() {
+    document.getElementById("chatBox").classList.remove("aberto");
+    document.getElementById("chatFab").style.display = "flex";
+}
+
+/* ============================================================
+   MENSAGENS
+   ============================================================ */
+// isHtml = true somente para respostas do bot (conteúdo controlado)
+function addMessage(text, type, isHtml) {
+    const chat = document.getElementById("chatMessages");
+    const message = document.createElement("div");
+    message.classList.add("message", type);
+    const content = document.createElement("div");
+    content.classList.add("message-content");
+    if (isHtml) { content.innerHTML = text; } else { content.textContent = text; }
+    const time = document.createElement("span");
+    time.classList.add("time");
+    time.textContent = getTime();
+    content.appendChild(time);
+    message.appendChild(content);
+    chat.appendChild(message);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function sendMessage() {
+    if (aguardando) { return; }
+    const input = document.getElementById("messageInput");
+    const text = input.value.trim();
+    if (text === "") { return; }
+    addMessage(text, "user", false);
+    input.value = "";
+    simulateResponse(text);
+}
+
+function quickMessage(text) {
+    if (aguardando) { return; }
+    abrirChat();
+    addMessage(text, "user", false);
+    simulateResponse(text);
+}
+
+/* ============================================================
+   RESPOSTAS DO BOT
+   ============================================================ */
+function respostaEstoque() {
+    const lista = ESTOQUE.map(function (v) {
+        return "• " + v.marca + " " + v.modelo + " " + v.ano + " — " + formatPrice(v.preco);
+    }).join("<br>");
+    return "🚗 <strong>Veículos em destaque</strong><br><br>" + lista +
+        "<br><br>O estoque muda com frequência. Quer agendar um test drive ou falar com um vendedor?";
+}
+
+function respostaPrecos() {
+    return "💰 <strong>Preços e condições</strong><br><br>" +
+        "Os valores variam conforme o veículo, o ano e a forma de pagamento.<br><br>" +
+        "Aceitamos: " + CONFIG.pagamento + ".<br><br>" +
+        "Digite <strong>veículos</strong> para ver os preços dos destaques.";
+}
+
+function respostaFinanciamento() {
+    const docs = CONFIG.documentosFinanciamento.join("<br>• ");
+    return "🏦 <strong>Financiamento</strong><br><br>" +
+        "Fazemos simulação com os principais bancos. O valor da parcela depende da entrada, do prazo e da análise de crédito.<br><br>" +
+        "<strong>Documentos necessários:</strong><br>• " + docs + "<br><br>" +
+        "Para uma simulação, fale com um vendedor: " + CONFIG.whatsapp;
+}
+
+function respostaTroca() {
+    return "🔄 <strong>Troca e avaliação</strong><br><br>" +
+        "Avaliamos o seu veículo para dar como entrada na compra de outro.<br><br>" +
+        "Traga o veículo e o documento (CRLV) até a loja para uma avaliação, ou envie marca, modelo, ano e quilometragem para " +
+        CONFIG.whatsapp + ".";
+}
+
+function respostaTestDrive() {
+    return "📅 <strong>Test drive</strong><br><br>" +
+        "Para agendar, informe o veículo de interesse, o dia e o horário desejados pelo WhatsApp " +
+        CONFIG.whatsapp + " ou ligue para " + CONFIG.telefone + ".<br><br>Leve a sua CNH válida.";
+}
+
+function respostaLocalizacao() {
+    return "📍 <strong>Localização e horários</strong><br><br>" + CONFIG.endereco + "<br><br>" +
+        CONFIG.horario.semana + "<br>" + CONFIG.horario.sabado + "<br>" + CONFIG.horario.domingo;
+}
+
+function respostaContato() {
+    return "📞 <strong>Contato</strong><br><br>Telefone: " + CONFIG.telefone +
+        "<br>WhatsApp: " + CONFIG.whatsapp + "<br><br>Um vendedor vai atender você com prazer.";
+}
+
+function respostaSaudacao() {
+    return "Olá! 😊<br><br>É um prazer atender você na <strong>" + CONFIG.nome + "</strong>.<br><br>Como posso ajudar?";
+}
+
+function respostaPadrao() {
+    return "🤖 Entendi sua mensagem, mas ainda não sei responder essa pergunta.<br><br>" +
+        "Você pode perguntar sobre <strong>veículos, preços, financiamento, troca, test drive ou localização</strong>.<br><br>" +
+        "Se preferir, fale com um vendedor: " + CONFIG.whatsapp;
+}
+
+/* REGRAS: a ordem define a prioridade (a primeira que casar vence).
+   - palavras: casam com o INÍCIO de uma palavra ("financ" pega financiar, financiamento)
+   - exata: true = a palavra precisa ser idêntica (usado na saudação)  */
+const REGRAS = [
+    { palavras: ["test drive", "testdrive", "testar", "agendar", "agenda", "visita"], resposta: respostaTestDrive },
+    { palavras: ["troca", "trocar", "avaliacao", "avaliar", "meu carro", "minha moto", "meu veiculo"], resposta: respostaTroca },
+    { palavras: ["financ", "parcela", "entrada", "simula", "consorcio", "documento"], resposta: respostaFinanciamento },
+    { palavras: ["preco", "valor", "quanto", "custa", "condicao", "condicoes", "desconto", "pagamento", "vista"], resposta: respostaPrecos },
+    { palavras: ["veiculo", "carro", "moto", "automovel", "estoque", "disponivel", "disponiveis", "seminovo", "modelo", "suv", "sedan", "hatch"], resposta: respostaEstoque },
+    { palavras: ["local", "endereco", "onde", "horario", "funciona", "abre", "fecha", "chegar", "mapa"], resposta: respostaLocalizacao },
+    { palavras: ["contato", "telefone", "whatsapp", "zap", "vendedor", "falar", "atendente", "ligar"], resposta: respostaContato },
+    // Saudação por último: só responde se nenhum assunto acima casou
+    { palavras: ["oi", "ola", "bom dia", "boa tarde", "boa noite", "e ai", "opa"], exata: true, resposta: respostaSaudacao }
+];
+
+function casa(regra, texto) {
+    const alvo = " " + texto + " ";
+    return regra.palavras.some(function (palavra) {
+        return regra.exata ? alvo.includes(" " + palavra + " ") : alvo.includes(" " + palavra);
+    });
+}
+
+function simulateResponse(text) {
+    const typing = document.getElementById("typing");
+    setBusy(true);
+    typing.style.display = "block";
+    setTimeout(function () {
+        typing.style.display = "none";
+        const message = normalize(text);
+        let response = respostaPadrao();
+        for (const regra of REGRAS) {
+            if (casa(regra, message)) { response = regra.resposta(); break; }
+        }
+        addMessage(response, "bot", true);
+        setBusy(false);
+    }, 1200);
+}
+
+function handleKey(event) {
+    if (event.key === "Enter") { event.preventDefault(); sendMessage(); }
+}
+
+/* ============================================================
+   INICIALIZAÇÃO (preenche o site com os dados do CONFIG)
+   ============================================================ */
+document.title = CONFIG.nome;
+document.getElementById("storeName").textContent = "Atendente Virtual";
+document.getElementById("storeStatus").textContent = "Online • " + CONFIG.segmento;
+document.querySelectorAll(".store-name").forEach(function (el) { el.textContent = CONFIG.nome; });
+document.querySelectorAll(".time").forEach(function (el) { el.textContent = getTime(); });
+
+document.getElementById("endereco").textContent = CONFIG.endereco;
+document.getElementById("h-semana").textContent = CONFIG.horario.semana;
+document.getElementById("h-sabado").textContent = CONFIG.horario.sabado;
+document.getElementById("h-domingo").textContent = CONFIG.horario.domingo;
+document.getElementById("telefone").textContent = CONFIG.telefone;
+document.getElementById("whatsapp").textContent = CONFIG.whatsapp;
+document.getElementById("rodape").textContent = "© " + new Date().getFullYear() + " " + CONFIG.nome + ". Valores sujeitos a alteração sem aviso.";
+
+const docsEl = document.getElementById("docs");
+CONFIG.documentosFinanciamento.forEach(function (d) {
+    const li = document.createElement("li");
+    li.textContent = d;
+    docsEl.appendChild(li);
+});
+
+const grade = document.getElementById("grade");
+ESTOQUE.forEach(function (v) {
+    const card = document.createElement("div");
+    card.className = "carro";
+
+    const foto = document.createElement("div");
+    foto.className = "foto";
+    foto.textContent = v.marca;
+
+    const info = document.createElement("div");
+    info.className = "info";
+
+    const nome = document.createElement("h3");
+    nome.textContent = v.modelo;
+
+    const ano = document.createElement("div");
+    ano.className = "ano";
+    ano.textContent = v.ano;
+
+    const preco = document.createElement("div");
+    preco.className = "preco";
+    preco.textContent = formatPrice(v.preco);
+
+    const link = document.createElement("a");
+    link.href = "#contato";
+    link.textContent = "Quero este carro";
+
+    info.append(nome, ano, preco, link);
+    card.append(foto, info);
+    grade.appendChild(card);
+});
+</script>
+</body>
+</html>
